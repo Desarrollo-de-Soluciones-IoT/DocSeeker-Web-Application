@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import {Doctor} from "../../../interfaces/doctor";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {BreakpointObserver} from "@angular/cdk/layout";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {SourcesService} from "../../../services/sources.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {LogInService} from "../../../services/log-in.service";
 import {Router} from "@angular/router";
 
@@ -19,6 +17,10 @@ export class LogInDoctorComponent {
     hoursAvailable:[{id:0, hours: "9:00 AM - 10:00 AM"}, {id:1, hours:"10:30 AM - 12:00 PM"}, {id:2, hours:"15:30 PM - 17:00 PM"}]};
   doctors: Array<any> = [];
   signInForm: FormGroup;
+  logInForm: FormGroup  = new FormGroup({
+    dni: new FormControl(''),
+    password: new FormControl('')
+  });
 
   constructor(private newsSource: SourcesService, private loginService:LogInService, public builder:FormBuilder, private router: Router) {
     this.signInForm = this.builder.group({
@@ -47,7 +49,6 @@ export class LogInDoctorComponent {
     return this.signInForm.controls['email'];
   }
 
-
   get area(){
     return this.signInForm.controls['area'];
   }
@@ -67,15 +68,6 @@ export class LogInDoctorComponent {
     this.rpassword='';
   }
 
-  login(){
-    const doctorFound = this.doctors.find(doctor =>doctor.dni== this.doctor.dni && doctor.password == this.doctor.password)
-    if(doctorFound){
-      console.log(doctorFound)
-      localStorage.setItem('currentDoctor', JSON.stringify(doctorFound));
-      this.router.navigate(['/dashboardDoctor'])
-    }
-  }
-
   ngOnInit() {
     this.newsSource.getSources('doctors').subscribe((data: any): void => {
       this.doctors = data;
@@ -83,4 +75,16 @@ export class LogInDoctorComponent {
     });
   }
 
+  submitSignInForm() {
+    let user = {
+      dni: this.logInForm.value.dni ?? '',
+      password: this.logInForm.value.password ?? ''
+    }
+
+    this.loginService.login(user)
+      .subscribe(response => {
+        localStorage.setItem('currentDoctor', JSON.stringify(response[0]));
+        this.router.navigate(['/dashboardDoctor'])
+      });
+  }
 }

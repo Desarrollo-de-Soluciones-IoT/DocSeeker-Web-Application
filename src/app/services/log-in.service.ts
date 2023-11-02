@@ -8,7 +8,10 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class LogInService {
+
+  baseUrl: string = "http://localhost:8080";
   patients: Patient[] = [];
+
   constructor(private http: HttpClient) { }
 
   addPatient(patient: Patient){
@@ -44,4 +47,7 @@ export class LogInService {
     return this.patients;
   }
 
+  login(user: object): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/v1/doctors/login`, user);
+  }
 }
