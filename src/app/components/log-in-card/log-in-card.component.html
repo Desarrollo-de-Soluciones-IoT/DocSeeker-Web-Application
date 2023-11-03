@@ -6,32 +6,33 @@
     <mat-card-content>
       <mat-tab-group>
         <mat-tab label="Login">
-          <mat-form-field class="example-full-width">
-            <mat-label>DNI</mat-label>
-            <input type="string" matInput placeholder="Dni" value="" [(ngModel)]="patient.dni" required/>
-            <mat-error *ngIf="dni.errors?.['required']">
-              Dni is required
-            </mat-error>
-            <mat-error *ngIf="dni.errors?.['minlength']">
-              You must enter a correct Dni
-            </mat-error>
-            <mat-icon matSuffix>badge</mat-icon>
-          </mat-form-field>
+          <form [formGroup]="logInForm" (submit)="submitSignInForm()">
+            <mat-form-field class="example-full-width">
+              <mat-label>DNI</mat-label>
+              <input type="string" matInput placeholder="DNI" formControlName="dni">
+              <mat-error *ngIf="dni.errors?.['required']">
+                Dni is required
+              </mat-error>
+              <mat-error *ngIf="dni.errors?.['minlength']">
+                You must enter a correct Dni
+              </mat-error>
+              <mat-icon matSuffix>badge</mat-icon>
+            </mat-form-field>
 
-          <mat-form-field class="example-full-width">
-            <mat-label>Password</mat-label>
-            <input type="password" matInput placeholder="Password" [(ngModel)]="patient.password" required/>
-            <mat-error *ngIf="password.errors?.['required']">
-              Password is required
-            </mat-error>
-            <mat-error *ngIf="signInForm.get('password')?.hasError('minLength') && signInForm.get('password')?.touched">
-              Password must be at least 8 characters length
-            </mat-error>
-            <mat-icon matSuffix>vpn_key</mat-icon>
-          </mat-form-field>
-          <button mat-button color="primary" (click)="login()">Log In</button>
-        </mat-tab>
-
+            <mat-form-field class="example-full-width">
+              <mat-label>Password</mat-label>
+              <input type="password" matInput placeholder="Password" formControlName="password">
+              <mat-error *ngIf="password.errors?.['required']">
+                Password is required
+              </mat-error>
+              <mat-error *ngIf="signInForm.get('password')?.hasError('minLength') && signInForm.get('password')?.touched">
+                Password must be at least 8 characters length
+              </mat-error>
+              <mat-icon matSuffix>vpn_key</mat-icon>
+            </mat-form-field>
+            <button mat-button color="primary" type="submit">Log In</button>
+          </form>
+          </mat-tab>
 
         <mat-tab label="Register">
           <mat-form-field class="example-full-width">
@@ -109,6 +110,7 @@
 
           <button mat-button color="primary" (click)="register()">Register</button>
         </mat-tab>
+
       </mat-tab-group>
     </mat-card-content>
   </mat-card>

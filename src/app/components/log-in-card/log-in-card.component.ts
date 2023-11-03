@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Patient} from "../../interfaces/patient";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {LogInService} from "../../services/log-in.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {map, Observable, shareReplay} from "rxjs";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {SourcesService} from "../../services/sources.service";
@@ -29,6 +29,11 @@ export class LogInCardComponent implements OnInit{
   patient: Patient ={ dni: '', name: '', gender:'', birthday: '', email:'', cellphone: '', password:'', photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Emblem-person-blue.svg/2048px-Emblem-person-blue.svg.png"};
   patients: Array<any> = [];
   signInForm: FormGroup;
+  logInForm: FormGroup  = new FormGroup({
+    dni: new FormControl(''),
+    password: new FormControl('')
+  });
+
   constructor(private breakpointObserver: BreakpointObserver, private newsSource: SourcesService, private snackBar:MatSnackBar, private loginService:LogInService, public builder:FormBuilder, private router: Router) {
     this.signInForm = this.builder.group({
       dni: ['',[Validators.required, Validators.minLength(8)]],
@@ -80,18 +85,32 @@ export class LogInCardComponent implements OnInit{
     this.rpassword='';
   }
 
-  login(){
-    //IF USER IS FOUND
-    const patientFound = this.patients.find(patient => patient.dni== this.patient.dni && patient.password == this.patient.password)
-    if(patientFound){
-      this.snackBar.open('Login Succesfull','',{duration:1000})
-      console.log(patientFound)
-      localStorage.setItem('currentPatient', JSON.stringify(patientFound));
-      this.router.navigate(['/dashboard'])
+  // login(){
+  //   //IF USER IS FOUND
+  //   const patientFound = this.patients.find(patient => patient.dni== this.patient.dni && patient.password == this.patient.password)
+  //   if(patientFound){
+  //     this.snackBar.open('Login Succesfull','',{duration:1000})
+  //     console.log(patientFound)
+  //     localStorage.setItem('currentPatient', JSON.stringify(patientFound));
+  //     this.router.navigate(['/dashboard'])
+  //   }
+  //   else{
+  //     this.snackBar.open('Login Failed','',{duration:1000})
+  //   }
+  // }
+
+  submitSignInForm() {
+    let user = {
+      dni: this.logInForm.value.dni ?? '',
+      password: this.logInForm.value.password ?? ''
     }
-    else{
-      this.snackBar.open('Login Failed','',{duration:1000})
-    }
+
+    this.loginService.loginPatient(user)
+      .subscribe(response => {
+        localStorage.setItem('currentPatient', JSON.stringify(response[0]));
+        console.log("dsfdfsd", user)
+        this.router.navigate(['/dashboard'])
+      });
   }
 
   ngOnInit() {

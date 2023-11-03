@@ -50,4 +50,8 @@ export class LogInService {
   login(user: object): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/v1/doctors/login`, user);
   }
+
+  loginPatient(user: object): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/v1/patients/login`, user);
+  }
 }
