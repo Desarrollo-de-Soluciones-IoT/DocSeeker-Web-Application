@@ -70,6 +70,9 @@ import { NewsDoctorsDetailsComponent } from './views/doctors/news-doctors-detail
 import { ServicesPatientComponent } from './views/patients/services-patient/services-patient.component';
 import { TemperaturePatientComponent } from './views/patients/temperature-patient/temperature-patient.component';
 import { PulsePatientComponent } from './views/patients/pulse-patient/pulse-patient.component';
+import { TemperatureDoctorsComponent } from './views/doctors/temperature-doctors/temperature-doctors.component';
+import { PulseDoctorsComponent } from './views/doctors/pulse-doctors/pulse-doctors.component';
+import { PatientsListServicesComponent } from './views/doctors/patients-list-services/patients-list-services.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -119,6 +122,9 @@ import { PulsePatientComponent } from './views/patients/pulse-patient/pulse-pati
     ServicesPatientComponent,
     TemperaturePatientComponent,
     PulsePatientComponent,
+    TemperatureDoctorsComponent,
+    PulseDoctorsComponent,
+    PatientsListServicesComponent,
   ],
     imports: [
         BrowserModule,

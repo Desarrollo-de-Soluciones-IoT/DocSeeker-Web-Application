@@ -134,3 +134,8 @@ mat-drawer-container{
   height: 90px; /* ajusta la altura deseada */
   object-fit: cover;
 }
+.services_option{
+  margin-left: 15px;
+  width: 100%;
+  height: 90px; /* ajusta la altura deseada */
+}
