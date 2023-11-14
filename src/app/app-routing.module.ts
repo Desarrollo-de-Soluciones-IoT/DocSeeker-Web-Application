@@ -31,6 +31,9 @@ import {NewsDoctorsDetailsComponent} from "./views/doctors/news-doctors-details/
 import {ServicesPatientComponent} from "./views/patients/services-patient/services-patient.component";
 import {TemperaturePatientComponent} from "./views/patients/temperature-patient/temperature-patient.component";
 import {PulsePatientComponent} from "./views/patients/pulse-patient/pulse-patient.component";
+import {PatientsListServicesComponent} from "./views/doctors/patients-list-services/patients-list-services.component";
+import {TemperatureDoctorsComponent} from "./views/doctors/temperature-doctors/temperature-doctors.component";
+import {PulseDoctorsComponent} from "./views/doctors/pulse-doctors/pulse-doctors.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -63,7 +66,12 @@ const routes: Routes = [
   { path: 'listNewsDoctors', component: NewsDoctorsComponent},
   { path: 'listNewsDoctors/:id', component: NewsDoctorsDetailsComponent },
   { path: 'pulsePatient', component: PulsePatientComponent},
-  { path: 'temperaturePatient', component: TemperaturePatientComponent}
+  { path: 'temperaturePatient', component: TemperaturePatientComponent},
+  { path: 'listPatientsServices', component: PatientsListServicesComponent},
+  { path: 'temperatureDoctor/:idPatient', component: TemperatureDoctorsComponent},
+  { path: 'pulseDoctor/:idPatient', component: PulseDoctorsComponent}
+
+
 
 
 
