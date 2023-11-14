@@ -1,0 +1,258 @@
+:host{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+mat-drawer{
+  width: 260px;
+  background: #E0E0E0;
+}
+
+mat-drawer-container{
+  height: 100%;
+}
+.title {
+  font-size: 35px;
+  font-weight: bold;
+  text-align: left;
+  margin-left: 150px;
+  margin-top:30px;
+}
+.rectangle-container {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 150px;
+}
+
+.rectangle {
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.patient-details {
+  display: flex;
+  align-items: center;
+  margin-left: 120px;
+}
+
+.patient-photo {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #0093AB;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.patient-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.patient-name {
+  margin-left: 10px;
+  font-size: 27px;
+}
+
+.patient-weight {
+  padding: 10px;
+}
+
+
+.rectangle {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto 1fr;
+  gap: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 0px;
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.min_rectangle {
+  background-color: #0093AB;
+  border: 2px solid #0093AB;
+  border-radius: 10px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+  text-align: left;
+  grid-column: 1 / span 3;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.attribute-image {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 10px;
+}
+
+.attribute-label {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.title_allergies{
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  margin-left: 230px;
+  margin-top:30px;
+}
+.allergies-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  margin: 0 auto;
+}
+
+.allergy-item {
+  background-color: #F1F1F1;
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 4px;
+  margin-left: 220px;
+  color: #d7b456;
+  font-size: 20px;
+}
+
+.title_pathological {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  margin-left: 230px;
+  margin-top: 30px;
+}
+
+.pathologicals-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  margin: 0 auto;
+}
+
+.pathological-item {
+  background-color: #F1F1F1;
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 4px;
+  margin-left: 220px;
+  color: #a10227;
+  font-size: 20px;
+}
+
+.circle-container {
+  margin-top: 5rem;
+  display: flex;
+
+  align-items: center;
+  height: 300px; /* Ajusta la altura según sea necesario */
+  position: relative;
+}
+
+.circle {
+  border-radius: 50%;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+}
+
+.grey {
+  background-color: #cae8ee;
+  z-index: 1; /* Capa inferior */
+}
+
+.lightblue {
+  background-color: #56b7c8;
+  width: 350px;
+  height: 350px;
+  z-index: 2; /* Capa intermedia */
+  margin-left: 25px;
+}
+
+.blue {
+  background-color: #109ab0;
+  width: 300px;
+  height: 300px;
+  z-index: 3; /* Capa superior */
+  margin-left: 50px;
+}
+
+.text {
+  color: white;
+  font-size: 50px;
+}
+
+.record{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+.record p{
+  font-weight: bold;
+  font-size: 20px;
+}
+.recordTemperature p{
+  color: white;
+
+}
+.good{
+  background-color: #2BA3B7;
+}
+.bad{
+  background-color: #B72B2B;
+}
+p{
+  margin: 0
+}
+.btn{
+  padding: 3rem 7rem;
+  border: 1px solid black;
+  border-radius: 15px;
+  font-size: 40px;
+  background-color: rgba(180, 224, 232, 0.66);
+  transition: transform 0.2s;
+
+}
+.btn:hover{
+  cursor: pointer;
+  transform: scale(105%);
+
+}
+.recordTemperature{
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.5rem;
+  border-radius: 15px;
+}
+.recordImg{
+  width: 30px;
+}
+
+.container-right{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+}
