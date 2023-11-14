@@ -1,0 +1,62 @@
+<mat-drawer-container>
+  <mat-drawer mode="side" opened="true">
+    <app-sidebar></app-sidebar>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <h1 class="title">My Status</h1>
+    <div style="display: flex; width: 100%; justify-content: space-evenly; align-items: center">
+      <div class="rectangle-container">
+        <div class="patient-details">
+          <div class="patient-photo">
+            <img [src]="currentPatient.photo" alt="Patient Photo">
+          </div>
+          <div class="patient-name">
+            {{ currentPatient.name }}
+          </div>
+        </div>
+
+        <div class="circle-container">
+          <div class="circle blue">
+            <span class="text">80 BPM</span>
+          </div>
+          <div class="circle lightblue"></div>
+          <div class="circle grey"></div>
+        </div>
+
+      </div>
+
+      <div class="container-right">
+        <div class="records">
+          <div class="record">
+            <div class="recordTemperature good">
+              <img class="recordImg" src="assets/images/pulso_icon.png">
+              <p>80 BPM</p>
+            </div>
+            <p class="recordHour">8:00 am - 12:00 am</p>
+          </div>
+          <div class="record">
+            <div class="recordTemperature bad">
+              <img class="recordImg" src="assets/images/pulso_icon.png">
+              <p>110 BPM</p>
+            </div>
+            <p class="recordHour">2:00 pm - 6:00 pm</p>
+          </div>
+          <div class="record">
+            <div class="recordTemperature good">
+              <img class="recordImg" src="assets/images/pulso_icon.png">
+              <p>82 BPM</p>
+            </div>
+            <p class="recordHour">9:00 pm - 12:00 pm</p>
+          </div>
+        </div>
+        <button class="btn" routerLink="/temperaturePatient">Temperature</button>
+      </div>
+
+    </div>
+
+
+
+  </mat-drawer-content>
+
+</mat-drawer-container>
