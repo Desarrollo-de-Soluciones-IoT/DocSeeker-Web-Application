@@ -57,8 +57,7 @@ export class LogInService {
   loginPatient2(user: object): Observable<any> {
     return this.http.post(`${this.baseUrlService.baseUrl}/api/v1/patients/login`, user);
   }
-  loginPatient(dni: string, password: string) {
-    const url = `${this.baseUrlService.baseUrl}/api/v1/patients/dni/${dni}/password/${password}`;
-    return this.http.get<Patient>(url);
+  loginPatient(loginPatient: object) {
+    return this.http.post<Patient>(`${this.baseUrlService.baseUrl}/api/v1/patients/login`, loginPatient);
   }
 }
