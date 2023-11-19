@@ -5,5 +5,5 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class BaseUrlService {
-  baseUrl = 'http://localhost:8080';
+  baseUrl = 'http://54.166.176.139';
 }
