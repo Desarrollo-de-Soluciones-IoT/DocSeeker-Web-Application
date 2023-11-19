@@ -7,6 +7,7 @@ import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {SourcesService} from "../../services/sources.service";
 import { Router } from '@angular/router';
 import {PatientService} from "../../services/patient.service";
+import {PatientBack} from "../../interfaces/patientBack";
 
 
 
@@ -23,8 +24,16 @@ export class LogInCardComponent{
   patients: Array<Patient> = [];
   patient: Patient ={ id: 0 ,name: '', email: '', password:'', dni: '', height:0, weight: 0, bmi:0,birthday: '', cellphone: '', photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Emblem-person-blue.svg/2048px-Emblem-person-blue.svg.png", allergies: []};
   signInForm: FormGroup;
-  logInForm: FormGroup  = new FormGroup({
+  logInForm: FormGroup = new FormGroup({
     dni: new FormControl(''),
+    password: new FormControl('')
+  });
+  registerForm: FormGroup = new FormGroup({
+    dni: new FormControl(''),
+    name: new FormControl(''),
+    birthday: new FormControl(''),
+    phone: new FormControl(''),
+    email: new FormControl(''),
     password: new FormControl('')
   });
 
@@ -71,23 +80,6 @@ export class LogInCardComponent{
     { value: 'female', label: 'Female' },
   ];
 
-  register() {
-
-
-    if ((this.patient.password == this.rpassword) && this.rpassword !='' && this.patient.email!=''
-      && this.patient.dni!='' && this.patient.cellphone!='' && this.patient.name!='' && this.patient.birthday!='') {
-
-      this.loginService.registerPatient(this.patient).subscribe();
-      this.snackBar.open('Register Successful', '', {duration: 1500})
-    } else if (this.patient.password != this.rpassword) {
-      this.snackBar.open('Password and Confirmation Password must be the same', '', {duration: 1500})
-    } else {
-      this.snackBar.open('Register Failed, Complete all the cells', '', {duration: 1500})
-    }
-    this.patient={ id: 0 ,name: '', email: '', password:'', dni: '', height:0, weight: 0, bmi:0,birthday: '', cellphone: '', photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Emblem-person-blue.svg/2048px-Emblem-person-blue.svg.png", allergies: []};
-    this.rpassword='';
-  }
-
   submitPatientLogInForm() {
     let loginUser = {
       dni: this.logInForm.value.dni ?? '',
@@ -105,5 +97,20 @@ export class LogInCardComponent{
             this.snackBar.open('Login Failed', '', {duration: 1000});
           }
         });
+  }
+
+  submitPatientRegisterForm() {
+    let registerPatient: PatientBack = {
+      dni: this.registerForm.value.dni ?? '',
+      name: this.registerForm.value.name ?? '',
+      birthDate: this.registerForm.value.birthday ?? '',
+      phoneNumber: this.registerForm.value.phone ?? '',
+      email: this.registerForm.value.email ?? '',
+      password: this.registerForm.value.password ?? ''
+    }
+
+    console.log(registerPatient)
+
+    this.loginService.registerPatient(registerPatient).subscribe();
   }
 }

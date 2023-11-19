@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import {DoctorResource} from "../interfaces/doctor-resource";
 import {DoctorsService} from "./doctors.service";
 import { BaseUrlService } from './base-url.service';
+import {PatientBack} from "../interfaces/patientBack";
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class LogInService {
     this.patients.push(patient);
   }
 
-  registerPatient(patient: Patient){
+  registerPatient(patient: Patient | PatientBack){
     const url = `${this.baseUrlService.baseUrl}/api/v1/patients`;
     return this.http.post(url, patient);
   }
