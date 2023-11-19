@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Patient} from "../../interfaces/patient";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {LogInService} from "../../services/log-in.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {SourcesService} from "../../services/sources.service";
 import { Router } from '@angular/router';
@@ -23,6 +23,11 @@ export class LogInCardComponent{
   patients: Array<Patient> = [];
   patient: Patient ={ id: 0 ,name: '', email: '', password:'', dni: '', height:0, weight: 0, bmi:0,birthday: '', cellphone: '', photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Emblem-person-blue.svg/2048px-Emblem-person-blue.svg.png", allergies: []};
   signInForm: FormGroup;
+  logInForm: FormGroup  = new FormGroup({
+    dni: new FormControl(''),
+    password: new FormControl('')
+  });
+
   constructor(private breakpointObserver: BreakpointObserver, private newsSource: SourcesService, private snackBar:MatSnackBar, private patientsServices:PatientService, private loginService:LogInService, public builder:FormBuilder, private router: Router) {
     this.patientsServices.getAll().subscribe((data: any): void => {
       this.patients = data;
@@ -65,6 +70,7 @@ export class LogInCardComponent{
     { value: 'male', label: 'Male' },
     { value: 'female', label: 'Female' },
   ];
+
   register() {
 
 
@@ -82,20 +88,22 @@ export class LogInCardComponent{
     this.rpassword='';
   }
 
-  login() {
-    //IF USER IS FOUND
-    this.loginService.loginPatient(this.patient.dni, this.patient.password).subscribe((response) => {
-      console.log(response)
-      if (response) {
-        this.snackBar.open('Login Successful', '', {duration: 1000})
-        this.router.navigate(['/dashboard'])
-        localStorage.setItem('currentPatient', JSON.stringify(response));
+  submitPatientLogInForm() {
+    let loginUser = {
+      dni: this.logInForm.value.dni ?? '',
+      password: this.logInForm.value.password ?? ''
+    }
 
-      } else {
-        this.snackBar.open('Login Failed', '', {duration: 1000})
-      }
-
-    });
-
+    this.loginService.loginPatient(loginUser)
+        .subscribe(response => {
+          if (response) {
+            console.log("RESPONSE LOGIN DOCTOR", response)
+            this.snackBar.open('Login Successful', '', {duration: 1000});
+            localStorage.setItem('currentPatient', JSON.stringify(response));
+            this.router.navigate(['/dashboard']);
+          } else {
+            this.snackBar.open('Login Failed', '', {duration: 1000});
+          }
+        });
   }
 }
