@@ -3,38 +3,41 @@ import {Patient} from "../interfaces/patient";
 import {HttpClient} from "@angular/common/http";
 import {Doctor} from "../interfaces/doctor";
 import {Observable} from "rxjs";
+import {DoctorResource} from "../interfaces/doctor-resource";
+import {DoctorsService} from "./doctors.service";
+import { BaseUrlService } from './base-url.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LogInService {
-
-  baseUrl: string = "http://localhost:8080";
   patients: Patient[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private doctorService: DoctorsService, private baseUrlService: BaseUrlService) {
+
+  }
 
   addPatient(patient: Patient){
     this.patients.push(patient);
   }
 
   registerPatient(patient: Patient){
-    const url = 'http://localhost:3000/patients';
+    const url = `${this.baseUrlService.baseUrl}/api/v1/patients`;
     return this.http.post(url, patient);
   }
 
-  registerDoctor(doctor: Doctor){
-    const url ='http://localhost:3000/doctors';
+  registerDoctor(doctor: DoctorResource){
+    const url =`${this.baseUrlService.baseUrl}/api/v1/doctors`;
     return this.http.post(url, doctor);
   }
 
-  updateDoctor(doctor: Doctor, id :any){
-    const url = `http://localhost:3000/doctors/${id}`;
+  updateDoctor(doctor: DoctorResource, id :any){
+    const url = `${this.baseUrlService.baseUrl}/api/v1/doctors/${id}`;
     return this.http.put(url, doctor);
   }
 
   updatePatient(patient: Patient, id :any){
-    const url = `http://localhost:3000/patients/${id}`;
+    const url = `${this.baseUrlService.baseUrl}/api/v1/patients/${id}`;
     return this.http.put(url, patient);
   }
 
@@ -47,11 +50,15 @@ export class LogInService {
     return this.patients;
   }
 
-  login(user: object): Observable<any> {
-    return this.http.post(`${this.baseUrl}/api/v1/doctors/login`, user);
+  loginDoctor(user: object): Observable<any> {
+    return this.http.post(`${this.baseUrlService.baseUrl}/api/v1/doctors/login`, user);
   }
 
-  loginPatient(user: object): Observable<any> {
-    return this.http.post(`${this.baseUrl}/api/v1/patients/login`, user);
+  loginPatient2(user: object): Observable<any> {
+    return this.http.post(`${this.baseUrlService.baseUrl}/api/v1/patients/login`, user);
+  }
+  loginPatient(dni: string, password: string) {
+    const url = `${this.baseUrlService.baseUrl}/api/v1/patients/dni/${dni}/password/${password}`;
+    return this.http.get<Patient>(url);
   }
 }

@@ -73,6 +73,7 @@ import { PulsePatientComponent } from './views/patients/pulse-patient/pulse-pati
 import { TemperatureDoctorsComponent } from './views/doctors/temperature-doctors/temperature-doctors.component';
 import { PulseDoctorsComponent } from './views/doctors/pulse-doctors/pulse-doctors.component';
 import { PatientsListServicesComponent } from './views/doctors/patients-list-services/patients-list-services.component';
+import {NgxMaterialTimepickerModule} from "ngx-material-timepicker";
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -151,7 +152,8 @@ import { PatientsListServicesComponent } from './views/doctors/patients-list-ser
         MatTableModule,
         MatSelectModule,
         MatSortModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgxMaterialTimepickerModule
     ],
 
   providers: [SourcesService],

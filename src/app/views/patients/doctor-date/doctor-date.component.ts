@@ -53,7 +53,7 @@ export class DoctorDateComponent implements OnInit{
           if (!((date.doctorId == this.doctor.id) && (date.date == this.dateAppointment) && (date.hourId == hour.id))) {
             return
           }
-            this.datesBooked.push(hour)
+          this.datesBooked.push(hour)
         })
 
       })

@@ -15,7 +15,7 @@
 
       <div class="info">
         <h1 class="doctorName name">{{currentDoctor.name}}</h1>
-        <h2 class="speciality">{{currentDoctor.area}}</h2>
+        <h2 class="speciality">{{currentDoctor.speciality}}</h2>
       </div>
 
       <div class="averageScore">
@@ -33,8 +33,8 @@
       <div class="patientReviewCard" *ngFor="let review of reviewsToDoctor" >
         <app-review
           [namePatient]="review.customerName"
-          [reviewDescription]="review.customerReview"
-          [score]="review.customerScore">
+          [reviewDescription]="review.description"
+          [score]="review.rating">
 
         </app-review>
       </div>

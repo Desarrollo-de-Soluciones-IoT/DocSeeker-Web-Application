@@ -4,6 +4,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {SourcesService} from "../../../services/sources.service";
 import {LogInService} from "../../../services/log-in.service";
 import {Router} from "@angular/router";
+import {DoctorResource} from "../../../interfaces/doctor-resource";
 
 @Component({
   selector: 'app-log-in-doctor',
@@ -12,9 +13,7 @@ import {Router} from "@angular/router";
 })
 export class LogInDoctorComponent {
   rpassword: string ='';
-  doctor: Doctor={dni:'', password:'', name:'', area:'', description:'', patients:NaN, years:NaN, age:NaN, email:'', cost:NaN,
-    photo: "https://www.browardhealth.org/-/media/broward-health/placeholder/doctor-placeholder-male.jpg", education: [ {name: ''}],
-    hoursAvailable:[{id:0, hours: "9:00 AM - 10:00 AM"}, {id:1, hours:"10:30 AM - 12:00 PM"}, {id:2, hours:"15:30 PM - 17:00 PM"}]};
+  doctor: DoctorResource = {} as DoctorResource;
   doctors: Array<any> = [];
   signInForm: FormGroup;
   logInForm: FormGroup  = new FormGroup({
@@ -55,24 +54,20 @@ export class LogInDoctorComponent {
 
   register(){
     if ((this.doctor.password == this.rpassword) && this.rpassword !='' && this.doctor.email!=''
-      && this.doctor.name !='' && this.doctor.dni!='' && this.doctor.age>23 && this.doctor.area!='') {
+      && this.doctor.name !='' && this.doctor.dni!='' && this.doctor.speciality!='') {
       this.loginService.registerDoctor(this.doctor).subscribe();
 
     } else if (this.doctor.password != this.rpassword) {
       console.log("ingrese su contraseña bien")
     }
-    this.doctor={dni:'', password:'', name:'', area:'', description:'', patients:0, years:0, age:0, email:'', cost:0,
-      photo: "https://www.browardhealth.org/-/media/broward-health/placeholder/doctor-placeholder-male.jpg", education: [ {name: ''} ],
-      hoursAvailable:[{id:0, hours: "9:00 AM - 10:00 AM"}, {id:1, hours:"10:30 AM - 12:00 PM"}, {id:2, hours:"15:30 PM - 17:00 PM"}]
+    this.doctor={id: 0, dni:'', password:'', name:'', speciality:'', description:'', patientsAssisted:'', experienceYears:'', email:'', doctorFee:'',
+      profilePhoto: "https://www.browardhealth.org/-/media/broward-health/placeholder/doctor-placeholder-male.jpg", birthDate: '', phoneNumber: ''
     };
     this.rpassword='';
   }
 
   ngOnInit() {
-    this.newsSource.getSources('doctors').subscribe((data: any): void => {
-      this.doctors = data;
-      console.log("Sources: ", this.doctors);
-    });
+
   }
 
   submitSignInForm() {
@@ -81,8 +76,9 @@ export class LogInDoctorComponent {
       password: this.logInForm.value.password ?? ''
     }
 
-    this.loginService.login(user)
+    this.loginService.loginDoctor(user)
       .subscribe(response => {
+        console.log("RESPONSE LOGIN DOCTOR",response)
         localStorage.setItem('currentDoctor', JSON.stringify(response[0]));
         this.router.navigate(['/dashboardDoctor'])
       });

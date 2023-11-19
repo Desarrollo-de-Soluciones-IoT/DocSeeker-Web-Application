@@ -10,7 +10,7 @@
       <div *ngFor="let hour of datesAndHoursAvailable">
         <app-go-payment class="card-hour"
                         [routerLink]="['/payment', doctor.id, dateAppointment, hour.id]"
-          [dateText]="dateAppointment" [timeText]="hour.hours" [doctorName]="doctor.name" [payment]="doctor.cost"
+                        [dateText]="dateAppointment" [timeText]="hour.hours" [doctorName]="doctor.name" [payment]="doctor.doctorFee"
         >
         </app-go-payment>
       </div>

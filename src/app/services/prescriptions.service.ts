@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable, retry, throwError} from "rxjs";
 import {Prescriptions} from "../interfaces/prescriptions";
+import {Doctor} from "../interfaces/doctor";
+import {BaseUrlService} from "./base-url.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PrescriptionsService {
 
-  basePath: string = 'http://localhost:3000/prescriptions';
+  basePath: string = `${this.baseUrlService.baseUrl}/api/v1/prescriptions`;
 
   httpOptions: {headers: HttpHeaders}={
     headers: new HttpHeaders({
@@ -16,7 +18,7 @@ export class PrescriptionsService {
     })
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private baseUrlService: BaseUrlService) { }
 
   // API ERROR HANDLE
   handleError(error: HttpErrorResponse):Observable<never>{
@@ -36,6 +38,12 @@ export class PrescriptionsService {
         retry(2),
         catchError(this.handleError)
       )
+  }
+  getDoctorById(id: any): Observable<Doctor> {
+    return this.http.get<Doctor>(`${this.baseUrlService.baseUrl}/api/v1/doctors/${id}`, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError));
   }
 
   // Get Prescription by id
