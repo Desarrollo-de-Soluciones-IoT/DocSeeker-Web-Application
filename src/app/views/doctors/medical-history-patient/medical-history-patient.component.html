@@ -10,18 +10,18 @@
 
     <div class="profile-container">
       <div class="img-patient">
-        <img [src]="currentPatient.photo" alt="Patient Photo">
+        <img src="./assets/images/patient-icon.png" alt="Patient Photo">
       </div>
 
       <div class="patient-info">
         <h1 class="name">{{ currentPatient.name }}</h1>
 
         <a class="patient-detail"  mat-list-item>
-          <mat-icon>calendar_today</mat-icon> {{ currentPatient.birthday }}
+          <mat-icon>calendar_today</mat-icon> {{ currentPatient.birthDate }}
         </a>
 
         <a class="patient-detail"  mat-list-item>
-          <mat-icon>call</mat-icon> {{ currentPatient.cellphone }}
+          <mat-icon>call</mat-icon> {{ currentPatient.phoneNumber }}
         </a>
 
         <a class="patient-detail"  mat-list-item>

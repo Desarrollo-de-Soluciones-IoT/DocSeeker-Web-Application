@@ -41,7 +41,7 @@ export class NewMedicalHistoryComponent {
     })
 
     this.patientsServices.getById(this.id).subscribe((data: any): void => {
-      this.patients = data;
+      this.patient = data;
 
     });
   }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SourcesService} from "../../../services/sources.service";
 import {ActivatedRoute} from "@angular/router";
+import {PatientService} from "../../../services/patient.service";
 
 @Component({
   selector: 'app-pulse-doctors',
@@ -14,14 +15,14 @@ export class PulseDoctorsComponent implements OnInit{
   patient: any;
 
   constructor(
-    private sourcesService: SourcesService,
+    private patientService: PatientService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.idPatient = this.route.snapshot.params['idPatient'];
 
-    this.sourcesService.getByIdSources('patients',this.idPatient).subscribe((data: any): void => {
+    this.patientService.getById(this.idPatient).subscribe((data: any): void => {
       this.currentPatient = data;
 
     });
