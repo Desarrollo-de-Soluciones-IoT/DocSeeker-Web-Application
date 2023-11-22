@@ -17,8 +17,8 @@
         </div>
 
         <div class="circle-container">
-          <div class="circle blue">
-            <span class="text">37 °C</span>
+          <div class="circle" [ngClass]="{'blue': temperatures.length > 0 && temperatures[temperatures.length - 1].value <= 37, 'red': temperatures.length > 0 && temperatures[temperatures.length - 1].value > 37}">
+            <span class="text">{{ temperatures.length > 0 ? temperatures[temperatures.length - 1].value + ' °C' : '' }}</span>
           </div>
           <div class="circle lightblue"></div>
           <div class="circle grey"></div>
@@ -28,26 +28,14 @@
 
       <div class="container-right">
         <div class="records">
-          <div class="record">
-            <div class="recordTemperature good">
+          <!-- Utiliza *ngFor para iterar sobre los últimos 3 datos de temperaturas -->
+          <div *ngFor="let temperature of temperatures.slice(temperatures.length - 3)" class="record">
+            <div [ngClass]="{'recordTemperature1 good': temperature.value <= 37, 'recordTemperature2 bad': temperature.value > 37}">
               <img class="recordImg" src="assets/images/temperature_icon.png">
-              <p>23.2°C</p>
+              <p>{{ temperature.value }}°C</p>
             </div>
-            <p class="recordHour">8:00 am - 12:00 am</p>
-          </div>
-          <div class="record">
-            <div class="recordTemperature bad">
-              <img class="recordImg" src="assets/images/temperature_icon.png">
-              <p>40.3°C</p>
-            </div>
-            <p class="recordHour">2:00 pm - 6:00 pm</p>
-          </div>
-          <div class="record">
-            <div class="recordTemperature good">
-              <img class="recordImg" src="assets/images/temperature_icon.png">
-              <p>27.4°C</p>
-            </div>
-            <p class="recordHour">9:00 pm - 12:00 pm</p>
+            <!-- Utiliza slice para obtener solo la hora del timestamp -->
+            <p class="recordHour">{{ temperature.timestamp | date:'yyyy-MM-dd HH:mm' }}</p>
           </div>
         </div>
         <button class="btn" [routerLink]="['/pulseDoctor', idPatient]">Pulse</button>

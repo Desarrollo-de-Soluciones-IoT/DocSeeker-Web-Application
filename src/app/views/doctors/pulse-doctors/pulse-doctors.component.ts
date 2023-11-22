@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SourcesService} from "../../../services/sources.service";
 import {ActivatedRoute} from "@angular/router";
 import {PatientService} from "../../../services/patient.service";
+import {PulsesService} from "../../../services/pulse.service";
 
 @Component({
   selector: 'app-pulse-doctors',
@@ -13,9 +14,11 @@ export class PulseDoctorsComponent implements OnInit{
   medicalInformation: any;
   currentPatient: any;
   patient: any;
+  pulses: any[] = [];
 
   constructor(
     private patientService: PatientService,
+    private pulsesService: PulsesService,
     private route: ActivatedRoute
   ) {}
 
@@ -27,7 +30,16 @@ export class PulseDoctorsComponent implements OnInit{
 
     });
 
-
+    // Call the pulse service to get data
+    this.pulsesService.getPulses().subscribe(
+      (data: any) => {
+        this.pulses = data;
+        console.log(this.pulses);
+      },
+      (error) => {
+        console.error("Error fetching pulse data", error);
+      }
+    );
 
   }
 }
