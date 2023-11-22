@@ -13,7 +13,7 @@ export class PulsesService {
 
 
   getPulses(): Observable<Object>{
-    return this.http.get(`${this.baseUrlService.baseUrl}/api/v1/pulses`)
+    return this.http.get(`${this.baseUrlService.baseUrl}/api/v1/pulse`)
   }
 
 }

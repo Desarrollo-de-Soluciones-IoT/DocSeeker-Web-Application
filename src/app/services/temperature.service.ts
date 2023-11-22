@@ -13,7 +13,7 @@ export class TemperatureService {
 
 
   getTemperatures(): Observable<Object>{
-    return this.http.get(`${this.baseUrlService.baseUrl}/api/v1/temperatures`)
+    return this.http.get(`${this.baseUrlService.baseUrl}/api/v1/temperature`)
   }
 
 }
