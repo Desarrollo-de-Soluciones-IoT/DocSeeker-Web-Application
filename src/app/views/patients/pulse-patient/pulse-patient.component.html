@@ -17,41 +17,29 @@
         </div>
 
         <div class="circle-container">
-          <div class="circle blue">
-            <span class="text">80 BPM</span>
+          <div class="circle" [ngClass]="{'blue': pulses.length > 0 && pulses[pulses.length - 1].value <= 80, 'red': pulses.length > 0 && pulses[pulses.length - 1].value > 80}">
+            <span class="text">{{ pulses.length > 0 ? pulses[pulses.length - 1].value + ' BPM' : 'No data' }}</span>
           </div>
           <div class="circle lightblue"></div>
           <div class="circle grey"></div>
         </div>
+        
 
       </div>
 
       <div class="container-right">
         <div class="records">
-          <div class="record">
-            <div class="recordTemperature good">
+          <div *ngFor="let pulse of pulses.slice(pulses.length - 3)" class="record">
+            <div [ngClass]="{'recordTemperature1 good': pulse.value <= 80, 'recordTemperature2 bad': pulse.value > 80}">
               <img class="recordImg" src="assets/images/pulso_icon.png">
-              <p>80 BPM</p>
+              <p>{{ pulse.value }} BPM</p>
             </div>
-            <p class="recordHour">8:00 am - 12:00 am</p>
-          </div>
-          <div class="record">
-            <div class="recordTemperature bad">
-              <img class="recordImg" src="assets/images/pulso_icon.png">
-              <p>110 BPM</p>
-            </div>
-            <p class="recordHour">2:00 pm - 6:00 pm</p>
-          </div>
-          <div class="record">
-            <div class="recordTemperature good">
-              <img class="recordImg" src="assets/images/pulso_icon.png">
-              <p>82 BPM</p>
-            </div>
-            <p class="recordHour">9:00 pm - 12:00 pm</p>
+            <p class="recordHour">{{ pulse.timestamp | date:'shortTime' }}</p>
           </div>
         </div>
         <button class="btn" routerLink="/temperaturePatient">Temperature</button>
       </div>
+      
 
     </div>
 

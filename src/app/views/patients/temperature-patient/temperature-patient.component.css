@@ -179,12 +179,14 @@ mat-drawer-container{
 }
 
 .lightblue {
-  background-color: #56b7c8;
+  background-color: #6797a0;
   width: 350px;
   height: 350px;
   z-index: 2; /* Capa intermedia */
   margin-left: 25px;
 }
+
+
 
 .blue {
   background-color: #109ab0;
@@ -193,6 +195,29 @@ mat-drawer-container{
   z-index: 3; /* Capa superior */
   margin-left: 50px;
 }
+
+.grey-red {
+  background-color: rgb(238, 202, 202);
+  z-index: 1; /* Capa inferior */
+}
+
+.lightred {
+  background-color: #a06767;
+  width: 350px;
+  height: 350px;
+  z-index: 2; /* Capa intermedia */
+  margin-left: 25px;
+}
+
+.red {
+  background-color: #e74c3c; /* Nuevo color rojo */
+  width: 300px; /* Mismo ancho que el círculo azul */
+  height: 300px; /* Mismo alto que el círculo azul */
+  z-index: 3; /* Capa superior (igual que el círculo azul) */
+  margin-left: 50px; /* Mismo margen que el círculo azul */
+  position: absolute; /* Misma posición que el círculo azul */
+}
+
 
 .text {
   color: white;
@@ -237,7 +262,7 @@ p{
   transform: scale(105%);
 
 }
-.recordTemperature{
+.recordTemperature1{
   display: flex;
   gap: .5rem;
   align-items: center;
@@ -245,6 +270,15 @@ p{
   padding: 1rem 1.5rem;
   border-radius: 15px;
 }
+.recordTemperature2{
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.5rem;
+  border-radius: 15px;
+}
+
 .recordImg{
   width: 30px;
 }
